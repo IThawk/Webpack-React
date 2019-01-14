@@ -4,11 +4,14 @@ var HTMLPlugin = require("html-webpack-plugin");
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  entry: __dirname + "/src/app.jsx",
+  entry: __dirname + "/src/app.js",
   output: {
     path: __dirname + "/dist/js",
     filename: "bundle.[chunkhash:8].js"
   },
+  resolve: {
+		extensions: [".js", ".jsx", ".json"] // 解决引用问题
+	},
   module: {
     rules: [{
       test: /\.(js|jsx)$/,
@@ -35,7 +38,7 @@ module.exports = {
     }),
     // 模板插件
     new HTMLPlugin({
-      template: __dirname + "/src/index.tmpl.html"
+      template: __dirname + "/index.tmpl.html"
     }),
     // 确认是开发环境还是生产环境
     new webpack.DefinePlugin({
